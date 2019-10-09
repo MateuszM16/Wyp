@@ -55,8 +55,31 @@
 				<input type="input" name="ID"/>ID<br>
 				<input type="submit" value="Wyslij"/>
 			</form>
-			
+
+					
 			<?php
+
+				$loginn_uzy=$_SESSION["login"];
+				$sql = "SELECT SUM(ilosc_km) as km FROM ile_km WHERE ID_uzytkownika = (Select id from uzytkownicy where login = '$loginn_uzy')";
+				$result = $conn->query($sql);
+
+				
+				
+				if($result->num_rows > 0)
+				{
+					$row = $result->fetch_assoc();
+					$x = 15000 - $row["km"];
+					if($row["km"]>15000) { echo "Przejechałeś ponad 15 tys km, dostajesz zniżke 15%"; }
+					else { echo "Aby dostać zniżke barkuje ci jeszcze: ".$x. " tys km"; }
+					
+				} 
+
+				else
+				{
+					echo "Aby dostać zniżke barkuje ci jeszcze 15 tys km";
+				}
+
+
 				$ID = $_POST["ID"];
 				if( ($_POST["ID"])!="" ){
 				$sql = "UPDATE samochod SET Czy_wyporzy='Tak' where ID='$ID'";

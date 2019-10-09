@@ -33,26 +33,24 @@
 		<div class="body">
 			<?php
 				echo "Dostępne samochody: ";
-				$sql = "select * from samochod where czy_wyporzy ='Nie'";
+				$sql = "select * from samochod where czy_wyporzy ='Tak'";
 				$result = $conn->query($sql);
 				if($result->num_rows > 0)
 				{
-					echo "<form action='Wypozyczalnia.php' method='post'>";
+					echo "<form action='Zwrot.php' method='post'>";
 					echo "<select name='Lista'>";
 					while($row = $result->fetch_assoc())
 					{
 						echo "<option value=",$row["Marka"],"'>",$row["ID"].". ".$row["Marka"]." ".$row["Model"],"</option>";
 					}
 					echo "</select>";
-					echo "</form>";
 
-				} else echo "Brak samochodów do wypożyczenia";
+				} else echo "Brak samochodów do Oddania";
 			?>
 			
 			<br><br>
 			<p> Podaj id samochodu, który chcesz oddac </p>
 			
-			<form action="Zwrot.php" method="POST">
 				<input type="input" name="ID"/>ID_Samochodu<br>
 				<input type="input" name="Ile_KM"/>Ile Przejechałeś km<br>
 				<input type="submit" value="Wyslij"/>
@@ -69,13 +67,9 @@
 						echo "Samochód został oddany";
 					}
 					else echo "Error: " . $sql . "<br>" . $conn->error;
-
-				$id = "";
 				
 				$loginn_uzy=$_SESSION["login"];
-				$sql = "INSERT INTO ile_km(ID,ID_uzytkownika) Values('ID_uzytkownika=(Select id from uzytkownicy where login = '$loginn_uzy')')";
-				$conn->query($sql);
-				$sql = "UPDATE ile_km SET ilosc_km ='$Ile_KM' where ID_uzytkownika=(Select id from uzytkownicy where login = '$loginn_uzy')";
+				$sql = "INSERT INTO ile_km (ID_uzytkownika,ilosc_km) Values ((Select id from uzytkownicy where login = '$loginn_uzy'),'$Ile_KM')";
 				$conn->query($sql);
 				
 				}else echo "pola nie mogą być puste";
