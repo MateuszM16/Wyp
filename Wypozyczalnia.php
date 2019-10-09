@@ -17,6 +17,7 @@
 	</head>
 	<body>
 		<div class="naglowek">
+		Wyporzyczalnia samochodów!
 			<?php
 				include('polaczenie.php');
 			?>
@@ -36,27 +37,22 @@
 				
 				if($result->num_rows > 0)
 				{
-					echo "<form action='Wypozyczalnia.php' method='post'>";
+					echo "<form action='Wypozyczalnia.php' method='POST'>";
 					echo "<select name='Lista'>";
 					while($row = $result->fetch_assoc())
 					{
-						echo "<option value=",$row["Marka"],"'>",$row["ID"].". ".$row["Marka"]." ".$row["Model"],"</option>";
+						echo "<option value=",$row["ID"],">",$row["Marka"]." ".$row["Model"],"</option>";
 					}
 					echo "</select>";
+								
+					echo "<br><br>";
+					echo "<input type='submit' value='Wyporzycz'/>";
 					echo "</form>";
 
-				} else echo "Brak samochodów do wypożyczenia";
+				} else echo "Brak samochodów do wypożyczenia</BR>";
 			?>
-			
-			<br><br>
-			
-			<form action="Wypozyczalnia.php" method="POST">
-				<p> Podaj ID samochodu, który chcesz wyporzyczyć </p>
-				<input type="input" name="ID"/>ID<br>
-				<input type="submit" value="Wyslij"/>
-			</form>
 
-					
+				
 			<?php
 
 				$loginn_uzy=$_SESSION["login"];
@@ -80,9 +76,9 @@
 				}
 
 
-				$ID = $_POST["ID"];
-				if( ($_POST["ID"])!="" ){
-				$sql = "UPDATE samochod SET Czy_wyporzy='Tak' where ID='$ID'";
+				$ID = $_POST["Lista"];
+				if( ($_POST["Lista"])!="" ){
+				$sql = "UPDATE samochod SET Czy_wyporzy='Tak' where $ID = ID";
 				if($conn->query($sql) == TRUE)
 				{
 					echo "Samochód został wypożyczony";

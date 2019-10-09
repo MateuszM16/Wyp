@@ -10,7 +10,7 @@
 	</head>
 	<body>
 		<div class="naglowek">
-			
+		Wyporzyczalnia samochodów!
 			
 			<?php
 				include('polaczenie.php');
@@ -49,7 +49,7 @@
 				
 				if ($result->num_rows > 0)
 				{
-					echo "Taki login jest już zanjęty";
+					echo "Taki login jest już zajęty, wybierz inny";
 				}
 				else 
 				{

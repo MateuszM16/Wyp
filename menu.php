@@ -2,22 +2,12 @@
 
 if (isset($_SESSION['zalogowany']) && $_SESSION['zalogowany'] == 1)
 {
-	echo "<div class='guzik'>";
-	echo "<a href='Wylogowanie.php'>Wylogowanie</a>";
-	echo "</div>";
-	echo "<div class='guzik'>";
-	echo "<a href='Wypozyczalnia.php'>Wypozyczalnia</a>";
-	echo "</div>";
-	echo "<div class='guzik'>";
-	echo "<a href='Zwrot.php'>Zwrot</a>";
-	echo "</div>";
+	echo "<a href='Wylogowanie.php'><div class='guzik'>Wylogowanie</div></a>";
+	echo "<a href='Wypozyczalnia.php'><div class='guzik'>Wypozyczalnia</div></a>";
+	echo "<a href='Zwrot.php'><div class='guzik'>Zwrot</div></a>";
 }
 else{
-	echo "<div class='guzik'>";
-	echo "<a href='Rejestracja.php'>Rejestracja</a>";
-	echo "</div>";
-	echo "<div class='guzik'>";
-	echo "<a href='Logowanie.php'>Logowanie</a>";
-	echo "</div>";
+	echo "<a href='Rejestracja.php'><div class='guzik'>Rejestracja</div></a>";
+	echo "<a href='Logowanie.php'><div class='guzik'>Logowanie</div></a>";
 }
 ?>

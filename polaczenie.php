@@ -9,5 +9,5 @@
 	{
 	die("Połączenie nie udane " . $conn->connect_error);
 	}
-	else echo "Połączenie udane";
+	else echo "   ";
 ?>

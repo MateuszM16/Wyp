@@ -14,6 +14,8 @@
 	</head>
 	<body>
 		<div class="naglowek">
+
+		Wyporzyczalnia samochodów!
 		
 			<?php	
 				include('polaczenie.php');

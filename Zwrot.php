@@ -18,6 +18,7 @@
 	</head>
 	<body>
 		<div class="naglowek">
+		Wyporzyczalnia samochodów!
 			<?php
 				include('polaczenie.php');
 			?>
@@ -32,7 +33,7 @@
 		</div>
 		<div class="body">
 			<?php
-				echo "Dostępne samochody: ";
+				echo "Możesz zwrócić samochód: ";
 				$sql = "select * from samochod where czy_wyporzy ='Tak'";
 				$result = $conn->query($sql);
 				if($result->num_rows > 0)
@@ -41,25 +42,25 @@
 					echo "<select name='Lista'>";
 					while($row = $result->fetch_assoc())
 					{
-						echo "<option value=",$row["Marka"],"'>",$row["ID"].". ".$row["Marka"]." ".$row["Model"],"</option>";
+						echo "<option value=",$row["ID"],">",$row["Marka"]." ".$row["Model"],"</option>";
 					}
 					echo "</select>";
+					echo "</br>";
+					echo "<input type='input' name='Ile_KM'/>Ile Przejechałeś km<br>";
+					echo "<input type='submit' value='Zwróć'/>";
+					echo "</form>";
+
 
 				} else echo "Brak samochodów do Oddania";
 			?>
-			
-			<br><br>
-			<p> Podaj id samochodu, który chcesz oddac </p>
-			
-				<input type="input" name="ID"/>ID_Samochodu<br>
-				<input type="input" name="Ile_KM"/>Ile Przejechałeś km<br>
-				<input type="submit" value="Wyslij"/>
-			</form>
+			<br>
+
+				
 			
 			<?php
-				$id = $_POST["ID"];
+				$id = $_POST["Lista"];
 				$Ile_KM = $_POST["Ile_KM"];
-				if( ($_POST["ID"])!="" )
+				if( ($_POST["Lista"])!="" )
 				{
 					$sql = "UPDATE samochod SET Czy_wyporzy='Nie' where ID='$id'";
 					if($conn->query($sql) === TRUE)
